@@ -1,9 +1,9 @@
 import styles from './Post.module.scss';
 import { getPostById, removePost } from '../../../redux/postsRedux';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import { Container, Button, } from 'react-bootstrap';
-import DeletePostModal from '../Modal/Modal';
+import DeletePostModal from '../DeletePostModal/DeletePostModal';
 import { useState } from 'react';
 
 const Post = () => {
@@ -11,21 +11,16 @@ const Post = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const post = useSelector(state => getPostById(state, id));
-  const [modalVisibility, setmodalVisibility] = useState('none');
+  const navigate = useNavigate();
+
+  const [modalShow, setModalShow] = useState(false);
 
   const deletePost = e => {
     e.preventDefault();
-    dispatch(removePost(id))
+    dispatch(removePost(id));
+    navigate('/');
   }
 
-  const showModal = () => {
-    setmodalVisibility('block');
-  }
-
-  const hideModal = () => {
-    setmodalVisibility('none');
-  }
-  
   if (!post) return <Navigate to='/' />
 
   return (
@@ -39,10 +34,10 @@ const Post = () => {
         </div>
         <div className={styles.buttonContainer}>
           <Button variant="outline-info" className={styles.button}>Edit</Button>
-          <Button onClick={showModal} variant="outline-danger" className={styles.button}>Delete</Button>
+          <Button onClick={() => setModalShow(true)} variant="outline-danger" className={styles.button}>Delete</Button>
         </div>
       </div>
-      <DeletePostModal show={modalVisibility} hideModalAction={hideModal} deletePostAction={deletePost} />
+      <DeletePostModal show={modalShow} onHide={() => setModalShow(false)} deletePostAction={deletePost} />
     </Container>
   )
 };
