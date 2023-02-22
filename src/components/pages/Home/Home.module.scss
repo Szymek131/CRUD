@@ -1,0 +1,12 @@
+.homeContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.postsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
