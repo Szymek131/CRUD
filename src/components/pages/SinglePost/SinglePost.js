@@ -1,7 +1,9 @@
+import Post from "../../features/Post/Post"
+
 const SinglePost = () => {
   return (
     <div>
-      <h1>Single Post</h1>
+      <Post/>
     </div>
   )
 }
