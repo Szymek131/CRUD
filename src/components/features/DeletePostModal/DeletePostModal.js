@@ -1,6 +1,6 @@
 import { Modal, Button } from "react-bootstrap";
 
-const DeletePostModal = props => {
+const DeletePostModal = ({ deletePostAction, ...props}) => {
 
   return (
     <Modal {...props}
@@ -17,7 +17,7 @@ const DeletePostModal = props => {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={props.onHide} variant="secondary">Cancel</Button>
-          <Button onClick={props.deletePostAction} variant="danger">Remove</Button>
+          <Button onClick={deletePostAction} variant="danger">Remove</Button>
         </Modal.Footer>
       </div>
     </Modal>
