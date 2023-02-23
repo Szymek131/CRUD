@@ -15,6 +15,10 @@ const Post = () => {
 
   const [modalShow, setModalShow] = useState(false);
 
+  const edit = () => {
+    navigate('/post/edit/' + id);
+  }
+
   const deletePost = e => {
     e.preventDefault();
     dispatch(removePost(id));
@@ -33,7 +37,7 @@ const Post = () => {
           <span>{post.content}</span>
         </div>
         <div className={styles.buttonContainer}>
-          <Button variant="outline-info" className={styles.button}>Edit</Button>
+          <Button onClick={edit} variant="outline-info" className={styles.button}>Edit</Button>
           <Button onClick={() => setModalShow(true)} variant="outline-danger" className={styles.button}>Delete</Button>
         </div>
       </div>
