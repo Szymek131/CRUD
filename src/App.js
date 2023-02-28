@@ -9,7 +9,7 @@ import { Container } from "react-bootstrap";
 import Header from "./components/common/Header/Header";
 import Footer from "./components/common/Footer/Footer";
 
-function App() {
+const App =() => {
   return (
     <div className="App">
       <Container>
