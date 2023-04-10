@@ -6,7 +6,7 @@ const initialState = {
       title: 'Witcher Article',
       shortDescription: 'Short description of the article...',
       content: 'Main content of the article',
-      publishedDate: '02-02-2022',
+      publishedDate: new Date('02-03-2023'),
       author: 'John Doe'
     },
     {
@@ -14,7 +14,7 @@ const initialState = {
       title: 'Star Wars Article',
       shortDescription: 'Short description of the article...',
       content: 'Main content of the article',
-      publishedDate: '03-03-2023',
+      publishedDate: new Date('01-03-2023'),
       author: 'Amanda Doe'
     },
     {
@@ -22,7 +22,7 @@ const initialState = {
       title: 'Harry Potter Article',
       shortDescription: 'Short description of the article...',
       content: 'Main content of the article',
-      publishedDate: '02-02-2022',
+      publishedDate: new Date('04-01-2022'),
       author: 'Jacob Doe'
     },
     {
@@ -30,7 +30,7 @@ const initialState = {
       title: 'The Elder Scrolls Article',
       shortDescription: 'Short description of the article...',
       content: 'Main content of the article',
-      publishedDate: '02-02-2022',
+      publishedDate: new Date('02-02-2022'),
       author: 'Jean Doe'
     }
   ],

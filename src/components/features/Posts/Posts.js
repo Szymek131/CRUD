@@ -4,6 +4,7 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from './Posts.module.scss';
 import clsx from "clsx";
+import dateToStr from "../../../utils/dateToStr";
 
 const Posts = () => {
 
@@ -15,7 +16,7 @@ const Posts = () => {
           <Card className={clsx(styles.post, "mb-2")}>
             <Card.Title>{post.title}</Card.Title>
             <Card.Subtitle className={styles.subtitle}>Author: {post.author}</Card.Subtitle>
-            <Card.Subtitle className={styles.subtitle}>Published: {post.publishedDate}</Card.Subtitle>
+            <Card.Subtitle className={styles.subtitle}>Published: {dateToStr(post.publishedDate)}</Card.Subtitle>
             <Card.Text>
               {post.shortDescription}
             </Card.Text>
