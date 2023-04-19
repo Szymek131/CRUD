@@ -1,32 +1,47 @@
-import styles from './PostForm.module.scss';
 import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { Form, Button } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 
-const PostForm = ({ pageTitle, action, actionText, ...props }) => {
-  const [title, setTitle] = useState(props.title || '');
-  const [author, setAuthor] = useState(props.author || '');
+import { getAllCategories } from '../../../redux/categoriesRedux';
+
+import "react-datepicker/dist/react-datepicker.css";
+import 'react-quill/dist/quill.snow.css';
+import styles from './PostForm.module.scss';
+
+const initialPostValues = {
+  title: '',
+  author: '',
+  shortDescription: '',
+  content: '',
+  category: '',
+}
+
+const PostForm = ({ pageTitle, action, actionText, initialValues = initialPostValues }) => {
+  const [title, setTitle] = useState(initialValues.title);
+  const [author, setAuthor] = useState(initialValues.author);
   const [publishedDate, setPublishedDate] = useState(new Date());
-  const [shortDescription, setShortDescription] = useState(props.shortDescription || '');
-  const [content, setContent] = useState(props.content || '');
+  const [shortDescription, setShortDescription] = useState(initialValues.shortDescription);
+  const [content, setContent] = useState(initialValues.content);
+  const [category, setCategory] = useState(initialValues.category)
 
   const [contentError, setContentError] = useState(false);
   const [dateError, setDateError] = useState(false);
 
+  const categories = useSelector(getAllCategories);
+
   const { register, handleSubmit: validate, formState: { errors } } = useForm();
 
   const handleSubmit = () => {
-    setContentError(!content)
-    setDateError(!publishedDate)
+    setContentError(!content);
+    setDateError(!publishedDate);
     if (content && publishedDate) {
-      action({ title, author, publishedDate, shortDescription, content });
+      action({ title, author, publishedDate, shortDescription, content, category });
     }
   };
-
 
   return (
     <div className={styles.addPostContainer}>
@@ -58,6 +73,15 @@ const PostForm = ({ pageTitle, action, actionText, ...props }) => {
           {dateError && <small className="d-block form-text text-danger mt-2">This field is required</small>}
         </Form.Group>
         <Form.Group className="mb-3">
+          <Form.Label>Categories</Form.Label>
+          <Form.Select aria-label="Default select example" onChange={e => setCategory(e.target.value)}>
+            <option>Open this select menu</option>
+            {categories.map(category => (
+              <option key={category} value={category}>{category}</option>
+            ))}
+          </Form.Select>
+        </Form.Group>
+        <Form.Group className="mb-3">
           <Form.Label>Short description</Form.Label>
           <Form.Control
             {...register("shortDescription", { required: true, minLength: 20 })}
@@ -78,6 +102,19 @@ const PostForm = ({ pageTitle, action, actionText, ...props }) => {
       </Form>
     </div>
   )
+}
+
+PostForm.propTypes = {
+  pageTitle: PropTypes.string,
+  action: PropTypes.func.isRequired,
+  actionText: PropTypes.string.isRequired,
+  initialValues: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    shortDescription: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+  })
 }
 
 export default PostForm;

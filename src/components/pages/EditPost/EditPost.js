@@ -2,7 +2,7 @@ import EditPostForm from "../../features/EditPostForm/EditPostForm"
 
 const EditPost = () => {
   return (
-    <EditPostForm/>
+    <EditPostForm />
   )
 }
 

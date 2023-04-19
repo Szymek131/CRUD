@@ -8,6 +8,7 @@ const NavBar = () => {
       <Navbar.Brand href='/' className={styles.navBarItem}>Blog.App</Navbar.Brand>
       <Nav className={styles.navBarList}>
         <Nav.Link as={NavLink} to="/" className={styles.navBarItem}>Home</Nav.Link>
+        <Nav.Link as={NavLink} to="/categories" className={styles.navBarItem}>Categories</Nav.Link>
         <Nav.Link as={NavLink} to="/about" className={styles.navBarItem}>About</Nav.Link>
       </Nav>
     </Navbar>
